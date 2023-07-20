@@ -1,6 +1,8 @@
 import os
 import json
 from dataclasses import asdict
+
+from device import Device
 from pool import DevicePool
 
 # Create the device pool
@@ -28,3 +30,7 @@ def handle_result(job):
 
 def remove_device(id: str):
     devicePool.remove(id)
+
+
+def create_device(device: "Device"):
+    devicePool.add(device)

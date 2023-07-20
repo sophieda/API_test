@@ -2,6 +2,7 @@ from flask import Flask, request
 from threading import Thread
 
 import utils
+from device import Device
 
 
 class API:
@@ -17,6 +18,13 @@ class API:
     @app.route("/hello")
     def helloworld():
         return "Hellow World"
+
+    @app.route("/device", methods=["POST"])
+    def add_device():
+        data = request.json
+        device = Device(**data)
+        utils.create_device(device)
+        return "", 200
 
     @app.route("/device/<id>", methods=["DELETE"])
     def remove_device(id: str):
