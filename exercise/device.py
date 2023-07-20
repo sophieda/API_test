@@ -6,12 +6,11 @@ from collections import defaultdict
 
 
 class DeviceState(Enum):
-    UP = 'UP'
-
+    UP = "UP"
 
 
 @dataclass
-class Device():
+class Device:
 
     id: str
     address: str

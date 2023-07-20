@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 
 
 @dataclass
-class Job():
+class Job:
     id: str
     user_id: str
     device_type: str
@@ -15,7 +15,7 @@ class Job():
 
 
 @dataclass
-class Program():
+class Program:
     id: str
     device_type: str
     priority: int = 1

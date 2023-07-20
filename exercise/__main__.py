@@ -8,8 +8,8 @@ from exercise.job import Job
 from exercise.worker import Worker
 
 # The actual program
-if __name__ == '__main__':
-    print('Starting the scheduler')
+if __name__ == "__main__":
+    print("Starting the scheduler")
 
     pool = DevicePool()
     queue = PriorityQueue()

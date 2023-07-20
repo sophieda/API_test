@@ -1,6 +1,4 @@
-
-class PriorityQueue():
-
+class PriorityQueue:
     def push(self, item, priority):
         raise NotImplementedError
 

@@ -1,10 +1,9 @@
-
 from exercise.errors import ErrorDeviceAlreadyExists, ErrorDeviceNotFound
 from exercise.device import Device
 from typing import Dict
 
 
-class DevicePool():
+class DevicePool:
     devices: Dict[str, Device]
 
     def __init__(self):
