@@ -15,3 +15,6 @@ def test_queue():
     assert q.pop() == item2
     assert q.pop() == item3
     assert q.pop() == item1
+
+
+test_queue()
