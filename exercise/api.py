@@ -4,6 +4,7 @@ import uuid
 
 import utils
 from device import Device
+from job import Job
 from exercise.errors import ErrorDeviceAlreadyExists, ErrorDeviceNotFound
 
 
@@ -46,5 +47,20 @@ class API:
 
             except ErrorDeviceNotFound:
                 return "", 404
+        except:
+            return "", 500
+
+    @app.route("/job", methods=["POST"])
+    def add_job():
+        try:
+            data = request.json
+            # create unique id
+            unique_id = str(uuid.uuid4())
+            job = Job(id=unique_id, **data)
+
+            # add job to the queue
+            utils.add_job(job)
+            return unique_id, 200
+
         except:
             return "", 500

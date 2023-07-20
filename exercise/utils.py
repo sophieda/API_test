@@ -4,9 +4,13 @@ from dataclasses import asdict
 
 from device import Device
 from pool import DevicePool
+from job import Job
+from jobqueuemanager import JobQueueManager
 
 # Create the device pool
 devicePool = DevicePool()
+jobQueueManager = JobQueueManager({})
+
 
 RESULTS_FILE = "results.jsonl"
 
@@ -34,3 +38,8 @@ def remove_device(id: str):
 
 def create_device(device: "Device"):
     devicePool.add(device)
+
+
+def add_job(job: "Job"):
+    jobQueueManager.publish(job)
+
