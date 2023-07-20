@@ -1,6 +1,10 @@
 import os
 import json
 from dataclasses import asdict
+from pool import DevicePool
+
+# Create the device pool
+devicePool = DevicePool()
 
 RESULTS_FILE = "results.jsonl"
 
@@ -20,3 +24,7 @@ def handle_result(job):
         f.write(json.dumps(asdict(job)))
         f.write("\n")
     return
+
+
+def remove_device(id: str):
+    devicePool.remove(id)

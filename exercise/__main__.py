@@ -18,8 +18,8 @@ if __name__ == "__main__":
     # using threading, asyncio, or any other library you see fit.
     # e.g. with threading
     api = API()
-    threading.Thread(target=api.run)
+    threading.Thread(target=api.run())
 
     # TODO:
-    worker = Worker()
-    worker.run()
+    # worker = Worker()
+    # worker.run()

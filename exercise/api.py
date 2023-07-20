@@ -1,4 +1,7 @@
+from flask import Flask, request
 from threading import Thread
+
+import utils
 
 
 class API:
@@ -6,5 +9,16 @@ class API:
     API.run should start the server.
     """
 
+    app = Flask(__name__)
+
     def run(self):
-        raise NotImplementedError("You shall not pass !")
+        self.app.run(debug=True)
+
+    @app.route("/hello")
+    def helloworld():
+        return "Hellow World"
+
+    @app.route("/device/<id>", methods=["DELETE"])
+    def remove_device(id: str):
+        utils.remove_device(id)
+        return "", 204
