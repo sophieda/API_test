@@ -1,5 +1,9 @@
+import utils
+
+
 class Worker:
-    def run():
+    def run(self):
         """wait for new jobs on the queue and send them to the right device
         """
-        raise NotImplementedError
+        utils.job_processing()
+

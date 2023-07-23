@@ -5,11 +5,11 @@ from dataclasses import asdict
 from device import Device
 from pool import DevicePool
 from job import Job
-from jobqueuemanager import JobQueueManager
+from queue import PriorityQueue
 
 # Create the device pool
 devicePool = DevicePool()
-jobQueueManager = JobQueueManager({})
+priorityQueue = PriorityQueue()
 
 
 RESULTS_FILE = "results.jsonl"
@@ -41,5 +41,14 @@ def create_device(device: "Device"):
 
 
 def add_job(job: "Job"):
-    jobQueueManager.publish(job)
+    priorityQueue.push(job, job.priority)
 
+
+def job_processing():
+    while True:
+        if priorityQueue.queue:
+            job = priorityQueue.pop()
+            for id_device, device in devicePool.devices.items():
+                if job.device_type == device.type:
+                    job.result = device.send(job)
+                    handle_result(job)
