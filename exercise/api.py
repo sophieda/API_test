@@ -1,5 +1,4 @@
 from flask import Flask, request
-from threading import Thread
 import uuid
 
 import utils
@@ -16,16 +15,16 @@ class API:
     app = Flask(__name__)
 
     def run(self):
-        self.app.run(debug=True)
+        self.app.run()
 
     @app.route("/hello")
     def helloworld():
         return "Hellow World"
 
-    @app.route("/device", methods=["POST"])
+    @app.route("/devices", methods=["POST"])
     def add_device():
         try:
-            data = request.json
+            data = request.get_json()
             # create unique id
             unique_id = str(uuid.uuid4())
             device = Device(id=unique_id, **data)
@@ -38,7 +37,7 @@ class API:
         except:
             return "", 500
 
-    @app.route("/device/<id>", methods=["DELETE"])
+    @app.route("/devices/<id>", methods=["DELETE"])
     def remove_device(id: str):
         try:
             try:
@@ -50,10 +49,10 @@ class API:
         except:
             return "", 500
 
-    @app.route("/job", methods=["POST"])
+    @app.route("/jobs", methods=["POST"])
     def add_job():
         try:
-            data = request.json
+            data = request.get_json()
             # create unique id
             unique_id = str(uuid.uuid4())
             job = Job(id=unique_id, **data)
