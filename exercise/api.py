@@ -63,3 +63,13 @@ class API:
 
         except:
             return "", 500
+
+    @app.route("/disconnect_worker", methods=["POST"])
+    def disconnect():
+        utils.stop_job_processing()
+        return "Disconnection succesful", 200
+
+    @app.route("/connect_worker", methods=["POST"])
+    def connect():
+        utils.restart_job_processing()
+        return "Worker connection succesful", 200

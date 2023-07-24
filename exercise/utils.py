@@ -7,10 +7,11 @@ from pool import DevicePool
 from job import Job
 from queue import PriorityQueue
 
-# Create the device pool
+# Create the device pool and priority queue
 devicePool = DevicePool()
 priorityQueue = PriorityQueue()
-
+# to stop infinity
+stop = False
 
 RESULTS_FILE = "results.jsonl"
 
@@ -46,9 +47,26 @@ def add_job(job: "Job"):
 
 def job_processing():
     while True:
+        if stop == True:
+            break
         if priorityQueue.queue:
             job = priorityQueue.pop()
             for id_device, device in devicePool.devices.items():
                 if job.device_type == device.type:
                     job.result = device.send(job)
                     handle_result(job)
+
+
+def stop_job_processing():
+    """Stop the job process done by the worker.
+    """
+    global stop
+    stop = True
+
+
+def restart_job_processing():
+    """Restart the job process.
+    """
+    global stop
+    stop = False
+    job_processing()
