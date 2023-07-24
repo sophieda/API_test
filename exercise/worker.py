@@ -7,10 +7,3 @@ class Worker:
         """
         utils.job_processing()
 
-    # def stop_job_processing(self):
-    #     utils.stop = True
-
-    # def restart_job_processing(self):
-    #     utils.stop = False
-    #     utils.job_processing()
-
